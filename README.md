@@ -34,8 +34,6 @@
   <em>Add / edit game — categories, media, notes</em>
 </p>
 
-> **Renaming your files:** Put PNGs in [`Screenshots/`](Screenshots/) as `screenshot-dark.png`, `screenshot-light.png`, and `screenshot-modal.png`, or update the image paths in this file. Details in [`Screenshots/README.md`](Screenshots/README.md).
-
 ---
 
 ## Features
@@ -145,12 +143,37 @@ Contributions and ideas are welcome via issues and pull requests.
 
 ---
 
-## License
+## 📜 License
 
-This project is released under the [MIT License](LICENSE).
+This project is licensed under the **MIT License**, allowing you to freely use, modify, and distribute the code.
+
+**MIT License** — see the [`LICENSE`](LICENSE) file for full text.
 
 ---
 
-## Author
+## 📧 Contact
 
-**[@manxlr](https://github.com/manxlr)**
+For any questions, suggestions, or feedback, please reach out:
+
+- **Email:** [nszeeshankhalid@gmail.com](mailto:nszeeshankhalid@gmail.com)
+- **GitHub:** [@manxlr](https://github.com/manxlr)
+
+---
+
+## 🔗 Links
+
+- **[GitHub Repository](https://github.com/manxlr/games-showcase)**
+
+---
+
+## 💖 Donations
+
+If you find this project helpful and would like to support its continued development, you can donate using the following cryptocurrency addresses:
+
+| Asset | Address |
+|-------|---------|
+| **Ethereum (ETH)** | `0x23774348bc491Ff70F39c63f39B0e542a59b5B14` |
+| **Bitcoin (BTC)** | `bc1qp7wltg8frvecuujjs9f3ck28r0s0h0qzld2fu6` |
+| **Dogecoin (DOGE)** | `DTbwxMs4wenN2kUea77rHPQ8nbJrSk4o7D` |
+
+Your support is greatly appreciated and helps maintain and improve open-source projects!
