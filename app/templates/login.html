@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Games Showcase</title>
+    <link rel="icon" href="/static/icons/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/static/icons/icon.png" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+    <div class="background-glow glow-1"></div>
+    <div class="background-glow glow-2"></div>
+    <div class="background-grid"></div>
+
+    <main class="auth-container">
+        <section class="auth-card glass-panel">
+            <p class="eyebrow">Welcome Back</p>
+            <h1>Login</h1>
+            <p class="subtitle">Access your personal game library.</p>
+
+            {% if error %}
+            <p class="auth-error">{{ error }}</p>
+            {% endif %}
+
+            <form method="post" action="/login" class="auth-form">
+                <label for="username_or_email">Username or email</label>
+                <input id="username_or_email" name="username_or_email" type="text" required />
+
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" required />
+
+                <button type="submit" class="auth-btn">Login</button>
+            </form>
+
+            <p class="auth-footer">
+                No account yet?
+                <a href="/register">Create one</a>
+                · <a href="/help">How it works</a>
+            </p>
+        </section>
+    </main>
+</body>
+</html>

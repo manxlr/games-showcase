@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page_title }}</title>
+    <link rel="icon" href="/static/icons/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/static/icons/icon.png" />
+    <link rel="apple-touch-icon" href="/static/icons/icon.png" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+    <div class="top-bar">
+        <a href="/help" class="icon-btn" title="Help" aria-label="Help">?</a>
+        <button id="export-pdf-btn" type="button" class="icon-btn" title="Export visible games to PDF" aria-label="Export PDF">⬇</button>
+        <button id="theme-toggle-btn" type="button" class="icon-btn theme-icon" title="Toggle theme" aria-label="Toggle theme">
+            <span class="theme-icon-dark">☾</span>
+            <span class="theme-icon-light">☀</span>
+        </button>
+        <form method="post" action="/logout" class="logout-form-inline">
+            <button type="submit" class="icon-btn icon-btn-logout" title="Log out" aria-label="Log out">
+                <svg class="logout-svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </button>
+        </form>
+    </div>
+
+    <div class="background-glow glow-1"></div>
+    <div class="background-glow glow-2"></div>
+    <div class="background-grid"></div>
+
+    <main class="container main-with-topbar">
+        <header class="hero">
+            <div class="hero-text">
+                <div class="hero-title-row">
+                    <img class="brand-logo" src="/static/icons/icon.png" alt="" width="48" height="48" loading="lazy" onerror="this.style.display='none'" />
+                    <h1>Games Showcase</h1>
+                </div>
+                <p class="subtitle">
+                    A premium self-hosted dashboard for the games I’ve finished, I’m currently playing, and the worlds I still want to explore.
+                </p>
+            </div>
+        </header>
+
+        <section class="toolbar glass-panel">
+            <div class="toolbar-left">
+                <h2>Library</h2>
+                <p class="toolbar-subtitle">Search, filter by status or category, and curate your collection—everything stays on your infrastructure.</p>
+                <div class="search-row">
+                    <input id="search-input" class="search-input" type="text" placeholder="Search title, platform..." />
+                    <label class="favorite-toggle">
+                        <input id="favorite-only" type="checkbox" />
+                        Favorites only
+                    </label>
+                </div>
+                <div id="category-filters" class="category-filters"></div>
+            </div>
+
+            <div class="toolbar-actions">
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="All">All</button>
+                    <button class="filter-btn" data-filter="Played">Played</button>
+                    <button class="filter-btn" data-filter="Playing">Playing</button>
+                    <button class="filter-btn" data-filter="Wishlist">Wishlist</button>
+                </div>
+                <button id="open-create-modal" type="button" class="create-btn">+ Add Game</button>
+            </div>
+        </section>
+
+        <section id="games-grid" class="games-grid">
+            <div class="loading-card glass-panel">
+                <p>Loading your game library...</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="game-modal" class="modal hidden">
+        <div class="modal-backdrop" data-close-modal="true"></div>
+        <section class="modal-card glass-panel modal-scroll">
+            <h3 id="modal-title">Add Game</h3>
+            <form id="game-form" class="crud-form">
+                <input type="hidden" id="game-id" />
+
+                <label for="game-title">Title</label>
+                <input id="game-title" type="text" required maxlength="255" />
+
+                <label for="game-status">Status</label>
+                <select id="game-status" required class="styled-select">
+                    <option value="Wishlist">Wishlist</option>
+                    <option value="Playing">Playing</option>
+                    <option value="Played">Played</option>
+                </select>
+
+                <label>Categories</label>
+                <div id="category-checkboxes" class="category-checkboxes"></div>
+
+                <label for="game-rating">Rating (0-10)</label>
+                <input id="game-rating" type="number" min="0" max="10" step="0.1" />
+
+                <label for="game-year">Release year</label>
+                <input id="game-year" type="number" min="1970" max="2100" />
+
+                <label for="game-platform">Platform</label>
+                <input id="game-platform" type="text" maxlength="40" placeholder="PC, PS5, Xbox..." />
+
+                <label for="game-hours">Completion hours</label>
+                <input id="game-hours" type="number" min="0" max="10000" step="0.5" />
+
+                <label>Images (max 20 total)</label>
+                <div id="upload-dropzone" class="upload-dropzone upload-dropzone-lg">
+                    <p class="upload-dropzone-title">Drag & drop images here</p>
+                    <p class="upload-hint">PNG, JPG, JPEG, BMP, AVIF, WEBP — up to 20 images per game.</p>
+                    <div class="upload-buttons">
+                        <label class="mini-btn">
+                            Choose images
+                            <input id="game-files" type="file" accept=".png,.jpg,.jpeg,.bmp,.avif,.webp" multiple hidden />
+                        </label>
+                        <label class="mini-btn">
+                            Choose folder
+                            <input id="game-folder" type="file" accept=".png,.jpg,.jpeg,.bmp,.avif,.webp" multiple webkitdirectory directory hidden />
+                        </label>
+                    </div>
+                </div>
+                <div id="thumb-strip" class="thumb-strip"></div>
+                <p id="upload-info" class="upload-info">No pending images.</p>
+
+                <label for="game-notes">Notes</label>
+                <textarea id="game-notes" rows="4" placeholder="Your thoughts..."></textarea>
+
+                <div class="modal-footer-row">
+                    <div class="crud-actions">
+                        <button id="close-modal-btn" type="button" class="secondary-btn">Cancel</button>
+                        <button id="submit-game-btn" type="submit" class="create-btn">Save</button>
+                    </div>
+                    <label class="favorite-check favorite-check-trailing">
+                        <input id="game-favorite" type="checkbox" />
+                        <span>Favorite</span>
+                    </label>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
